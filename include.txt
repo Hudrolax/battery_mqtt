@@ -1,0 +1,6 @@
+./.env-example
+./add_task.bat
+./battery_mqtt.py
+./include.txt
+./requirements.txt
+./run.bat
