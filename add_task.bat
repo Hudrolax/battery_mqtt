@@ -1,5 +1,5 @@
 @echo off
-chcp 1252 >nul
+chcp 65001 >nul
 set SCRIPT_DIR=%~dp0
 
 set TASK_NAME=BatteryMQTT
@@ -54,8 +54,8 @@ set XMLFILE=%TEMP%\BatteryMQTT.xml
     echo ^</Task^>
 ) > "%XMLTMPFILE%"
 
-REM Convert the temporary XML file to UTF-16 LE using PowerShell
-powershell -Command "Get-Content '%XMLTMPFILE%' | Out-File -FilePath '%XMLFILE%' -Encoding Unicode"
+REM Convert temporary XML file to UTF-16 using PowerShell with proper quoting
+powershell -Command "Get-Content \"%XMLTMPFILE%\" | Out-File -FilePath \"%XMLFILE%\" -Encoding Unicode"
 
 echo Creating scheduled task "%TASK_NAME%"...
 schtasks /create /tn "%TASK_NAME%" /xml "%XMLFILE%" /f
