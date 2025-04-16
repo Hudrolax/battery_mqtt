@@ -1,25 +1,19 @@
 @echo off
-REM Переходим в директорию, где находится данный батник
-cd /d %~dp0
-
-REM Если виртуальное окружение не создано, создаём его
-if not exist ".venv" (
-    echo Virtual environment not found. Creating it...
-    python -m venv venv
+REM Проверка наличия директории venv
+if exist "venv" (
+    echo Виртуальное окружение найдено. Активация...
+    call venv\Scripts\activate
 ) else (
-    echo Virtual environment already exists.
+    echo Виртуальное окружение не найдено. Создание нового окружения...
+    python -m venv venv
+    call venv\Scripts\activate
+    echo Обновление pip...
+    python -m pip install --upgrade pip
+    echo Установка зависимостей из requirements.txt...
+    python -m pip install -r requirements.txt
 )
 
-
-REM Устанавливаем зависимости из requirements.txt
-echo Installing dependencies...
-uv pip install -e .
-
-REM Активируем виртуальное окружение
-venv\Scripts\activate.bat
-
-REM Запускаем скрипт через точку входа
-echo Running battery-mqtt script...
-uv run battery-mqtt
+echo Запуск приложения...
+python battery_mqtt.py
 
 pause
