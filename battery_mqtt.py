@@ -1,4 +1,4 @@
-# uv: pip: asyncio-mqtt>=0.16.2, python-dotenv>=1.0.1, psutil>=5.9.8
+# uv: pip: asyncio-mqtt>=0.16.2,<1.0.0, python-dotenv>=1.0.1, psutil>=5.9.8
 # uv: entrypoint: battery_mqtt.py
 
 import os
